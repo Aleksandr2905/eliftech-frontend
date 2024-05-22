@@ -1,15 +1,7 @@
 import * as yup from "yup";
-import { parse, isDate } from "date-fns";
 
 const emailRegexp = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 const today = new Date();
-
-const parseDateString = (value, originalValue) => {
-  const parsedDate = isDate(originalValue)
-    ? originalValue
-    : parse(originalValue, "yyyy-MM-dd", new Date());
-  return parsedDate;
-};
 
 export const registerSchema = yup.object().shape({
   fullName: yup
@@ -23,12 +15,11 @@ export const registerSchema = yup.object().shape({
     .matches(emailRegexp, "Error email"),
   birthDate: yup
     .date()
-    .transform(parseDateString)
     .max(today, "Birthday must be in the past")
     .typeError("Invalid date format")
     .required("Field is required"),
-  payment: yup
+  source: yup
     .string()
-    .required("Payment method is required")
-    .oneOf(["cash", "bank"], "Invalid payment method"),
+    .required("Source is required")
+    .oneOf(["social", "friends", "myself"], "Invalid source"),
 });
