@@ -1,44 +1,64 @@
 import { useEffect, useState } from "react";
 import { getAllEvents } from "../../services/api";
-import { Link } from "react-router-dom";
+import * as s from "./Events.styled";
+import Loader from "../Loader/Loader";
+import PaginationButtons from "../PaginationButtons/PaginationButtons";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
-  // const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const { events } = await getAllEvents({});
+        setIsLoading(true);
+        const { events, totalPages } = await getAllEvents({
+          page: currentPage,
+        });
         setEvents(events);
+        setTotalPages(totalPages);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getEvents();
-  }, []);
+  }, [currentPage]);
 
-  console.log(events);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
-  return (
-    <section>
-      <h1>Events</h1>
-      <ul>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <s.Wrapper>
+      <s.Title>Events</s.Title>
+      <s.List>
         {events.map((event) => {
           return (
-            <li key={event._id}>
-              <h2>{event.title}</h2>
-              <p>{event.description}</p>
-              <p>{event.event_date}</p>
-              <p>{event.organizer}</p>
-              <div>
-                <Link to={`/register/${event._id}`}>Register</Link>
-                <Link to={`/participants/${event._id}`}>View</Link>
-              </div>
-            </li>
+            <s.Card key={event._id}>
+              <s.CardTitle>{event.title}</s.CardTitle>
+              <s.Description>{event.description}</s.Description>
+              <s.Date>{event.event_date}</s.Date>
+              <s.Organizer>{event.organizer}</s.Organizer>
+              <s.BtnWrapper>
+                <s.Button to={`/register/${event._id}`}>Register</s.Button>
+                <s.Button to={`/participants/${event._id}`}>View</s.Button>
+              </s.BtnWrapper>
+            </s.Card>
           );
         })}
-      </ul>
-    </section>
+      </s.List>
+      <PaginationButtons
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </s.Wrapper>
   );
 };
 

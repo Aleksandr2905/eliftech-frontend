@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import { addUser } from "../../services/api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../helpers/validation";
+import * as s from "./RegisterForm.styled";
+import { useState } from "react";
+import Loader from "../Loader/Loader";
 
 const RegisterForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const {
     register,
@@ -17,42 +21,38 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (newUser) => {
-    addUser({ id, newUser });
-    console.log(newUser);
-    reset();
+    try {
+      setIsLoading(true);
+      addUser({ id, newUser });
+      reset();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  return (
-    <div>
-      RegisterForm
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="fullName">
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <s.Wrapper>
+      <s.Title>Event registration</s.Title>
+      <s.Form onSubmit={handleSubmit(onSubmit)}>
+        <s.Label htmlFor="fullName">
           Full Name
-          <input
-            type="text"
-            {...register("fullName")}
-            //   errors={errors.fullName}
-          />
-          <p>{errors.fullName?.message}</p>
-        </label>
-        <label htmlFor="email">
+          <s.Input type="text" {...register("fullName")} />
+          <s.Error>{errors.fullName?.message}</s.Error>
+        </s.Label>
+        <s.Label htmlFor="email">
           Email
-          <input
-            type="email"
-            {...register("email")}
-            //   errors={errors.email}
-          />
-          <p>{errors.email?.message}</p>
-        </label>
-        <label htmlFor="birthDate">
+          <s.Input type="email" {...register("email")} />
+          <s.Error>{errors.email?.message}</s.Error>
+        </s.Label>
+        <s.Label htmlFor="birthDate">
           Date of birth
-          <input
-            type="date"
-            {...register("birthDate")}
-            //   errors={errors.birthDate}
-          />
-          <p>{errors.birthDate?.message}</p>
-          <div>
+          <s.Input type="date" {...register("birthDate")} />
+          <s.Error>{errors.birthDate?.message}</s.Error>
+          <s.RadioGroup>
             <label htmlFor="radio-source">
               <input
                 {...register("source")}
@@ -80,11 +80,11 @@ const RegisterForm = () => {
               />
               Found myself
             </label>
-          </div>
-        </label>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+          </s.RadioGroup>
+        </s.Label>
+        <s.SubmitButton type="submit">Register</s.SubmitButton>
+      </s.Form>
+    </s.Wrapper>
   );
 };
 

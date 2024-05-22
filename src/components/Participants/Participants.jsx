@@ -1,41 +1,49 @@
 import { useEffect, useState } from "react";
 import { getEventById } from "../../services/api";
 import { useParams } from "react-router-dom";
+import * as s from "./Participants.styled";
+import Loader from "../Loader/Loader";
 
 const Participants = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const [event, setEvent] = useState({});
 
   useEffect(() => {
     const fetchEventById = async () => {
       try {
+        setIsLoading(true);
         const event = await getEventById(id);
         setEvent(event);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchEventById();
   }, [id]);
 
-  return (
-    <section>
-      <h2>{event.title} participants</h2>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <s.Wrapper>
+      <s.Title>{event.title} participants</s.Title>
       {event?.user?.length === 0 ? (
-        <p>There are no registered participants</p>
+        <s.SubTitle>There are no registered participants</s.SubTitle>
       ) : (
-        <ul>
+        <s.List>
           {event?.user?.map((item) => {
             return (
-              <li key={item._id}>
-                <p>{item.fullName}</p>
-                <p>{item.email}</p>
-              </li>
+              <s.Card key={item._id}>
+                <s.Text>{item.fullName}</s.Text>
+                <s.Text>{item.email}</s.Text>
+              </s.Card>
             );
           })}
-        </ul>
+        </s.List>
       )}
-    </section>
+    </s.Wrapper>
   );
 };
 
