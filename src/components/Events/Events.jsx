@@ -22,20 +22,22 @@ const Events = () => {
   return (
     <section>
       <h1>Events</h1>
-      {events.map((event) => {
-        return (
-          <li key={event._id}>
-            <h2>{event.title}</h2>
-            <p>{event.description}</p>
-            <p>{event.event_date}</p>
-            <p>{event.organizer}</p>
-            <div>
-              <Link to={`/register/${event._id}`}>Register</Link>
-              <Link to={`/participants/${event._id}`}>View</Link>
-            </div>
-          </li>
-        );
-      })}
+      <ul>
+        {events.map((event) => {
+          return (
+            <li key={event._id}>
+              <h2>{event.title}</h2>
+              <p>{event.description}</p>
+              <p>{event.event_date}</p>
+              <p>{event.organizer}</p>
+              <div>
+                <Link to={`/register/${event._id}`}>Register</Link>
+                <Link to={`/participants/${event._id}`}>View</Link>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 };

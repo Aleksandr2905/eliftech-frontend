@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const Participants = () => {
   const { id } = useParams();
-  const [event, setEvent] = useState();
+  const [event, setEvent] = useState({});
 
   useEffect(() => {
     const fetchEventById = async () => {
@@ -18,9 +18,25 @@ const Participants = () => {
     fetchEventById();
   }, [id]);
 
-  console.log(event);
-
-  return <div>Participants</div>;
+  return (
+    <section>
+      <h2>{event.title} participants</h2>
+      {event?.user?.length === 0 ? (
+        <p>There are no registered participants</p>
+      ) : (
+        <ul>
+          {event?.user?.map((item) => {
+            return (
+              <li key={item._id}>
+                <p>{item.fullName}</p>
+                <p>{item.email}</p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </section>
+  );
 };
 
 export default Participants;

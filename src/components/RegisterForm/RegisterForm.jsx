@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { addUser } from "../../services/api";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "../../helpers/validation";
 
 const RegisterForm = () => {
   const { id } = useParams();
@@ -11,9 +13,7 @@ const RegisterForm = () => {
     reset,
   } = useForm({
     mode: "onTouched",
-    //   resolver: yupResolver(
-    //      registerSchema
-    //   ),
+    resolver: yupResolver(registerSchema),
   });
 
   const onSubmit = (newUser) => {
