@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-white h-screen;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply m-0;
+}
+p {
+  @apply m-0;
+}
+a {
+  @apply no-underline text-current;
+}
+ul {
+  @apply list-none p-0 m-0;
+}
+li {
+  @apply list-none;
+}
+img {
+  @apply block max-w-full h-auto;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Gilroy Regular";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./assets/fonts/Gilroy-Regular.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: "Gilroy Medium";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(./assets/fonts/Gilroy-Medium.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: "Gilroy Semibold";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(./assets/fonts/Gilroy-Semibold.ttf) format("truetype");
+  }
+}

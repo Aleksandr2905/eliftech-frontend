@@ -1,0 +1,24 @@
+{
+  "nav": [
+    { "to": "/", "name": "Home" },
+    { "to": "/events", "name": "Events" }
+  ],
+  "social": [
+    {
+      "icon": "linkedIn",
+      "href": "https://www.linkedin.com",
+      "ariaLabel": "link to linkedin"
+    },
+    {
+      "icon": "instagram",
+      "href": "https://www.instagram.com/",
+      "ariaLabel": "link to instagram"
+    },
+    {
+      "icon": "facebook",
+      "href": "https://www.facebook.com/",
+      "ariaLabel": "link to facebook"
+    }
+  ],
+  "copyright": "Copyright © 2024 | All Rights Reserved"
+}
