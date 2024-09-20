@@ -9,7 +9,7 @@ export const Navigation: React.FC = () => {
         <NavLink
           key={name}
           to={to}
-          className={`text-base font-gilroyMedium  hover:text-hover md:text-xl transition-all duration-300 ${
+          className={`text-xl font-gilroyMedium  hover:text-hover transition-all duration-300 ${
             pathname === to ? "text-yellow-400" : "text-primaryText"
           }`}
         >

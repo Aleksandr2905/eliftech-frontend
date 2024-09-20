@@ -4,7 +4,7 @@ export const HomePage: React.FC = () => {
   const { title, subtitle, text } = home;
   return (
     <section>
-      <div className="container min-h-[calc(100vh-177px)] flex my-auto ">
+      <div className="container min-h-[calc(100vh-181px)] flex my-auto">
         <div className=" bg-customRadial rounded-lg p-5 flex flex-col gap-5 justify-center">
           <h1 className="text-white font-gilroySemibold text-2xl font-semibold md:text-4xl xl:text-7xl">
             {title}
