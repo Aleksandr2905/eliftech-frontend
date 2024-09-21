@@ -101,14 +101,14 @@ export const Form: React.FC = () => {
             <label
               key={value}
               htmlFor={`radio-source-${value}`}
-              className=" text-primaryText font-gilroyRegular text-lg relative"
+              className="text-primaryText font-gilroyRegular text-lg relative cursor-pointer hover:text-blue-500 transition-all duration-300"
             >
               <input
                 {...register("source")}
                 type="radio"
                 value={value}
                 id={`radio-source-${value}`}
-                className="mr-3"
+                className="mr-3 rounded-full cursor-pointer"
               />
               {label}
             </label>
