@@ -16,11 +16,12 @@ export const EventsPage: React.FC = () => {
 
   const { title } = eventsData;
 
-  const loadEvents = async (page: number) => {
+  const loadEvents = async (page: number, limit: number) => {
     try {
       setIsLoading(true);
       const { events: newEvents, totalPages } = await getAllEvents({
         page,
+        limit,
       });
       setEvents((prevEvents) => [...prevEvents, ...newEvents]);
       setTotalPages(totalPages);
@@ -32,7 +33,8 @@ export const EventsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadEvents(currentPage);
+    const defaultLimit = 6;
+    loadEvents(currentPage, defaultLimit);
   }, [currentPage]);
 
   useEffect(() => {
