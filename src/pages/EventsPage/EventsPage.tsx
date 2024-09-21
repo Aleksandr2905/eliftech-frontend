@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-
 import { EventCard } from "../../components/EventCard";
 import { Loader } from "../../components/Loader";
-
+import { EventsSort } from "../../components/EventsSort";
 import { getAllEvents } from "../../services/api";
 import { Events } from "./types";
-
 import { eventsData } from "../../data";
 
 export const EventsPage: React.FC = () => {
@@ -13,6 +11,9 @@ export const EventsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [sortType, setSortType] = useState<
+    "default" | "title" | "event_date" | "organizer"
+  >("default");
 
   const { title } = eventsData;
 
@@ -29,6 +30,31 @@ export const EventsPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const sortEvents = (events: Events[]) => {
+    if (sortType === "default") {
+      return events;
+    }
+    return events.sort((a, b) => {
+      if (sortType === "title") {
+        return a.title.localeCompare(b.title);
+      } else if (sortType === "event_date") {
+        return (
+          new Date(a.event_date).getTime() - new Date(b.event_date).getTime()
+        );
+      } else if (sortType === "organizer") {
+        return a.organizer.localeCompare(b.organizer);
+      }
+      return 0;
+    });
+  };
+
+  const resetFilters = () => {
+    setSortType("default");
+    setEvents([]);
+    setCurrentPage(1);
+    loadEvents(1);
   };
 
   useEffect(() => {
@@ -48,9 +74,10 @@ export const EventsPage: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, [currentPage, totalPages, isLoading]);
+
+  const sortedEvents = sortEvents(events);
 
   return (
     <section>
@@ -58,8 +85,15 @@ export const EventsPage: React.FC = () => {
         <h2 className="text-primaryText text-center text-lg font-gilroySemibold mb-6">
           {title}
         </h2>
+
+        <EventsSort
+          sortType={sortType}
+          setSortType={setSortType}
+          resetFilters={resetFilters}
+        />
+
         <ul className="flex flex-wrap gap-5 justify-center mb-5">
-          {events.map((event, index) => (
+          {sortedEvents.map((event, index) => (
             <li key={index}>
               <EventCard event={event} />
             </li>
