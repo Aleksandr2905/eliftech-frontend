@@ -1,0 +1,32 @@
+{
+  "title": "Event registration",
+  "inputs": [
+    {
+      "label": "Full name",
+      "type": "text",
+      "id": "fullName",
+      "name": "fullName",
+      "placeholder": "John Smith",
+      "autoComplete": "name"
+    },
+    {
+      "label": "E-mail",
+      "type": "email",
+      "id": "email",
+      "name": "email",
+      "placeholder": "johnsmith@email.com",
+      "autoComplete": "email"
+    }
+  ],
+  "date": {
+    "htmlFor": "birthDate",
+    "format": "dd.MM.yyyy",
+    "placeholder": "Select a date"
+  },
+  "sources": [
+    { "value": "social", "label": "Social media" },
+    { "value": "friends", "label": "Friends" },
+    { "value": "myself", "label": "Found myself" }
+  ],
+  "button": "Register"
+}

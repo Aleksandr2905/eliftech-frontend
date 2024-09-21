@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addUserProps } from "./types";
 
 const BASE_URL = "https://eliftech-backend-x7g5.onrender.com/api";
 
@@ -20,11 +21,6 @@ export const getEventById = async (id: string) => {
   } catch (error) {
     console.error(error);
   }
-};
-
-type addUserProps = {
-  id: string;
-  newUser: string;
 };
 
 export const addUser = async ({ id, newUser }: addUserProps) => {
