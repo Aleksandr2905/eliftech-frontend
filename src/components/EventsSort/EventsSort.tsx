@@ -8,7 +8,7 @@ export const EventsSort: React.FC<EventsSortProps> = ({
   return (
     <div className="mb-4 flex justify-center gap-4">
       <div>
-        <label className="mr-2">Sort by:</label>
+        <label className="mr-2 font-gilroyMedium text-lg">Sort by:</label>
         <select
           value={sortType}
           onChange={(e) =>
@@ -16,7 +16,7 @@ export const EventsSort: React.FC<EventsSortProps> = ({
               e.target.value as "default" | "title" | "event_date" | "organizer"
             )
           }
-          className="p-2 border rounded"
+          className="p-2  border rounded font-gilroyMedium text-lg"
         >
           <option value="default">Select sorting</option>
           <option value="title">Title</option>
@@ -27,7 +27,7 @@ export const EventsSort: React.FC<EventsSortProps> = ({
 
       <button
         onClick={resetFilters}
-        className="p-2 bg-gray-200 border rounded hover:bg-gray-300"
+        className="font-gilroyMedium text-sm p-2 bg-blue-500 border  rounded hover:bg-blue-700 text-white transition-all duration-300"
       >
         Reset Filters
       </button>

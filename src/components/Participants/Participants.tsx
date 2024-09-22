@@ -4,6 +4,7 @@ import { Loader } from "../Loader";
 import { getEventById } from "../../services/api";
 import { Event, User } from "./types";
 import { participants } from "../../data";
+import { Chart } from "../Chart";
 
 export const Participants = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -13,6 +14,13 @@ export const Participants = () => {
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   const { textRegister, textSearch } = participants;
+
+  const dateCreate = event?.user.map((item) => {
+    const date = new Date(item.createdAt ?? new Date());
+    return { registrationDate: date.toISOString().split("T")[0] };
+  });
+
+  console.log(dateCreate);
 
   useEffect(() => {
     const fetchEventById = async () => {
@@ -89,6 +97,10 @@ export const Participants = () => {
             </li>
           ))}
         </ul>
+      )}
+
+      {event?.user?.length !== 0 && (
+        <Chart registrations={dateCreate} chartType="line" />
       )}
     </div>
   );
