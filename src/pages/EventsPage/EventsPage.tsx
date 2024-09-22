@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { EventCard } from "../../components/EventCard";
+import toast from "react-hot-toast";
 import { Loader } from "../../components/Loader";
 import { EventsSort } from "../../components/EventsSort";
 import { getAllEvents } from "../../services/api";
@@ -27,6 +28,7 @@ export const EventsPage: React.FC = () => {
       setTotalPages(totalPages);
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong, try again.");
     } finally {
       setIsLoading(false);
     }

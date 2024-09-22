@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { addUserProps } from "./types";
 
 const BASE_URL = "https://eliftech-backend-x7g5.onrender.com/api";
@@ -10,6 +11,7 @@ export const getAllEvents = async ({ limit = 9, page = 1 }) => {
     const { data } = await instance.get(`/event?limit=${limit}&page=${page}`);
     return data;
   } catch (error) {
+    toast.error("Something went wrong, try again.");
     console.error(error);
   }
 };
@@ -19,6 +21,7 @@ export const getEventById = async (id: string) => {
     const { data } = await instance.get(`/event/${id}`);
     return data;
   } catch (error) {
+    toast.error("Something went wrong, try again.");
     console.error(error);
   }
 };
@@ -28,6 +31,7 @@ export const addUser = async ({ id, newUser }: addUserProps) => {
     const { data } = await instance.post(`/event/${id}`, newUser);
     return data;
   } catch (error) {
+    toast.error("Something went wrong, try again.");
     console.error(error);
   }
 };

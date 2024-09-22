@@ -12,6 +12,7 @@ import { FormData, Name, NewUser } from "./types";
 import { addUser } from "../../services/api";
 import { schema } from "../../helpers/validation";
 import { registration } from "../../data";
+import toast from "react-hot-toast";
 
 export const Form: React.FC = () => {
   const { id } = useParams();
@@ -41,9 +42,11 @@ export const Form: React.FC = () => {
   const onSubmit = async (data: NewUser) => {
     try {
       await addUser({ id: id as string, newUser: data });
+      toast.success("Congratulations, you have registered for the event!");
       reset();
       setBirthDate(null);
     } catch (error) {
+      toast.error("Something went wrong, try again.");
       console.error(error);
     }
   };

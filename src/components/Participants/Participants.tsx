@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import { Loader } from "../Loader";
 import { getEventById } from "../../services/api";
 import { Event, User } from "./types";
@@ -20,8 +21,6 @@ export const Participants = () => {
     return { registrationDate: date.toISOString().split("T")[0] };
   });
 
-  console.log(dateCreate);
-
   useEffect(() => {
     const fetchEventById = async () => {
       try {
@@ -33,6 +32,7 @@ export const Participants = () => {
         }
       } catch (error) {
         console.error(error);
+        toast.error("Something went wrong, try again.");
       } finally {
         setIsLoading(false);
       }
