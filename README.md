@@ -4,28 +4,22 @@ Web-based application for events registration.
 
 # Base level
 
-- Events board page
-- Event registration page
-- Event participants page
+- [x] ✅ Events board page
+- [x] ✅ Event registration page
+- [x] ✅ Event participants page
 
 # Middle level
 
-- Everything from the base level
-- Events board page
-- Event registration page:
+- [x] ✅ Everything from the base level
+- [x] ✅ Events board page
+- [x] ✅ Event registration page:
   - add form validation;
   - add DataPicker to Date of birth input;
-- Event participants page
+- [x] ✅ Event participants page
 
 # Advanced level
 
-- Everything from the middle level
-- Events board page: add infinite scroll pagination (when a user scrolls the page, it
-  automatically loads more events).
-- Event participants page: add line/bar chart displaying the amount of registrations per day for the given event.
-
-<ul>
-  <li><input type="checkbox" checked disabled style="accent-color: green;"> Events board page</li>
-  <li><input type="checkbox" checked disabled style="accent-color: green;"> Event registration page</li>
-  <li><input type="checkbox" checked disabled style="accent-color: green;"> Event participants page</li>
-</ul>
+- [x] ✅ Everything from the middle level
+- [x] ✅ Events board page: add infinite scroll pagination (when a user scrolls the page, it
+      automatically loads more events).
+- [x] ✅ Event participants page: add line/bar chart displaying the amount of registrations per day for the given event.
