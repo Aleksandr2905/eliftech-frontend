@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+# Events Registration App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web-based application for events registration.
 
-Currently, two official plugins are available:
+# Base level
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Events board page
+- Event registration page
+- Event participants page
 
-## Expanding the ESLint configuration
+# Middle level
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Everything from the base level
+- Events board page
+- Event registration page:
+  - add form validation;
+  - add DataPicker to Date of birth input;
+- Event participants page
 
-- Configure the top-level `parserOptions` property like this:
+# Advanced level
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Everything from the middle level
+- Events board page: add infinite scroll pagination (when a user scrolls the page, it
+  automatically loads more events).
+- Event participants page: add line/bar chart displaying the amount of registrations per day for the given event.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+<ul>
+  <li><input type="checkbox" checked disabled style="accent-color: green;"> Events board page</li>
+  <li><input type="checkbox" checked disabled style="accent-color: green;"> Event registration page</li>
+  <li><input type="checkbox" checked disabled style="accent-color: green;"> Event participants page</li>
+</ul>
