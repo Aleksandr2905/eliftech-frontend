@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -128,6 +128,12 @@ export const Form: React.FC = () => {
           {button}
         </button>
       </form>
+      <Link
+        to={`/participants/${id}`}
+        className="flex w-28 justify-center mx-auto mt-8 border-2 border-blue-500 rounded-3xl px-6 py-2 text-blue-500 font-gilroyRegular text-base hover:text-white hover:bg-blue-500 transition-all duration-300"
+      >
+        View
+      </Link>
     </div>
   );
 };
